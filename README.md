@@ -1,2 +1,2 @@
 # Sift-Surf-matlab
-EQ2425
+EQ2425 - KTH
