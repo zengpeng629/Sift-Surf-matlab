@@ -8,14 +8,12 @@ function fixedThreshold(img1,img2,des1,des2,kp1,kp2)
         for j = 1:size(des2,2)
             distance = sqrt(sum((des1(:,i)-des2(:,j)).^2));
             if distance < threshold
-                % if the distance is within the threshold, then match+1
-                % Store the index of the kepoints
+                % if the distan
                 matches = [matches;[i,j]];
             end
         end
     end
     
-    % Draw lines based on matches
     img3 = cat(2,img1,img2);
     imagesc(img3);hold on;
     for i = 1:size(matches,1)

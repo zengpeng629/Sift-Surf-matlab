@@ -1,12 +1,15 @@
 function nearestNeighbor(img1,img2,des1,des2,kp1,kp2)
+    % This function is for find the nearest neighbor as matched keypoint.    
     min_index = 0;
     matches = [];
 
+    % Compute the distances, while finding the minimal one.
     for i = 1:size(des1,2)
         min_distance = 9999;
         for j = 1:size(des2,2)
             distance = sqrt(sum((des1(:,i)-des2(:,j)).^2));
             if distance < min_distance
+                % find the min value, store its index.
                 min_distance = distance;
                 min_index = j;
             end
@@ -14,6 +17,7 @@ function nearestNeighbor(img1,img2,des1,des2,kp1,kp2)
         matches = [matches;[i,min_index]];
     end
     
+    % Draw lines
     img3 = cat(2,img1,img2);
     imagesc(img3);hold on;
     for i = 1:200

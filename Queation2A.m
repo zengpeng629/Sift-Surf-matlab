@@ -1,6 +1,6 @@
+%Read input images
 I = imread('obj1_5.JPG');
 I_gray = single(rgb2gray(I));
-%subplot(1,2,1);
 figure(1);
 imshow(I); hold on;
 
@@ -19,8 +19,7 @@ strongest_threshold = 4500;
 points_surf = detectSURFFeatures(I_gray,'MetricThreshold',strongest_threshold);
 [surf_kps, vpts1] = extractFeatures(I_gray, points_surf);
 
-%subplot(1,2,2);
 figure(2);
 imshow(I); hold on;
 plot(points_surf)
-%
+

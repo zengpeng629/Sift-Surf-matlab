@@ -1,6 +1,7 @@
 function nearestNeighborDistanceRatio(img1,img2,des1,des2,kp1,kp2)
     min_index = 0;
     matches = [];
+    % Threshold selection
 %     %best sift
 %     threshold = 0.905;
 %     %suboptimal sift
@@ -11,6 +12,7 @@ function nearestNeighborDistanceRatio(img1,img2,des1,des2,kp1,kp2)
     %suboptimal sift
     threshold = 0.825
     
+    % Compute the distances, in the same time store the min and second min
     for i = 1:size(des1,2)
         min_distance = 9999;
         second_min_distance = 9990;
@@ -24,13 +26,13 @@ function nearestNeighborDistanceRatio(img1,img2,des1,des2,kp1,kp2)
                     second_min_distance = distance;
             end
         end
-       % ratio = [ratio; min_distance / second_min_distance];
-        
+        % If the ratio is within the threshold
         if (min_distance / second_min_distance) < threshold
             matches = [matches;[i,min_index]];
         end
     end
     
+    %Draw lines
     img3 = cat(2,img1,img2);
     imagesc(img3);hold on;
     for i = 1:size(matches,1)

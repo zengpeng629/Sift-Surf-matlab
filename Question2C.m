@@ -1,3 +1,4 @@
+% Read images
 I = imread('obj1_5.JPG');
 I_gray_single = single(rgb2gray(I));
 
@@ -17,14 +18,18 @@ y_surf = [];
     
 m = 1;
 
+% Scale the images to get 8 different modified images
 for i = 0:1:8
-    %SIFT
+    %SIFT part.
     I_gray_single_modify = imresize(I_gray_single, m);
     cnt_matches = 0;
     
+    % Detect the keypoints of modified image
     [kps_sift_modify,des_sift_modify] = vl_sift(I_gray_single_modify,'PeakThresh', peak_thresh, 'edgethresh', edge_thresh);
+    % Scale the coordinates of the original image
     kps_sift_scaled = scaleKps(size(I,2), size(I,1),kps_sift,m);
     
+    %To indicate if the keypoints of modified image is alread matched
     flags = zeros(1,size(kps_sift_modify,2));
     kps_sift_modify = [kps_sift_modify; flags];
     
@@ -49,7 +54,7 @@ for i = 0:1:8
     y = [y,repeatability];
     x = [x,i];
     
-    %SURF
+    %SURF part same logic
     I_gray_modify = imresize(I_gray, m);
     cnt_matches = 0;
     
